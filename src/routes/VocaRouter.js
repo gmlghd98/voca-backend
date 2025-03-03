@@ -27,4 +27,7 @@ router.delete('/:vocaId', vocaController.deleteVoca);
 // 퀴즈 단어 추출
 router.get('/quiz', quizController.getQuizVoca);
 
+// 퀴즈 채점
+router.post('/quiz', quizController.postQuizVoca);
+
 module.exports = router;
