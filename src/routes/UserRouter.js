@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// mergeParams: true => 부모 라우터의 파라미터 사용 가능
 
 const userController = require('../controllers/UserController');
 const setRouter = require('../routes/SetRouter');
