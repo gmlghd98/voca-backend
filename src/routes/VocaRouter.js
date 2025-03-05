@@ -5,6 +5,8 @@ const router = express.Router({ mergeParams: true });
 const vocaController = require('../controllers/VocaController');
 const quizController = require('../controllers/QuizController');
 
+// Root - /api/users/{userId}/set/{setId}/voca
+
 // ---------- Voca ----------
 
 // 전체 단어 조회

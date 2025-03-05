@@ -5,6 +5,8 @@ const router = express.Router({ mergeParams: true });
 const setController = require('../controllers/SetController');
 const vocaRouter = require('../routes/VocaRouter');
 
+// Root - /api/users/{userId}/set
+
 // ---------- Voca Set ----------
 
 // 세트 생성
@@ -23,5 +25,8 @@ router.delete('/:setId', setController.deleteSet);
 
 // 단어 라우터 연결
 router.use('/:setId/voca', vocaRouter);
+
+// ---------- Set + Voca ----------
+router.post('/new', setController.postSetVoca);
 
 module.exports = router;

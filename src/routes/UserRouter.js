@@ -4,6 +4,8 @@ const router = express.Router();
 const userController = require('../controllers/UserController');
 const setRouter = require('../routes/SetRouter');
 
+// Root - /api/users
+
 // ---------- User ----------
 
 // 회원가입
