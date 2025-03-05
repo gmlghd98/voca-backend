@@ -1,5 +1,5 @@
 const setService = require('../services/SetService');
-const vocaService = require('../services/VocaService');
+const setAndVocaService = require('../services/SetAndVocaService');
 const { response } = require('../utils/format');
 
 // 세트 조회
@@ -90,7 +90,7 @@ exports.postSetVoca = async (req, res) => {
     }
 
     try {
-        await setService.postSetVoca(userId, set, voca);
+        await setAndVocaService.post(userId, set, voca);
         res.status(200).json(response('success', '세트와 단어 생성에 성공했습니다'));
     } catch (err) {
         res.status(500).json(response('fail', err.message));
