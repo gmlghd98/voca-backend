@@ -8,8 +8,9 @@ require('dotenv').config();
 const port = process.env.PORT;
 const host = process.env.HOST;
 
-// 서비스 진입 라우터
-const userRouter = require('./src/routes/UserRouter');
+// 라우터
+const userRouter = require('./src/routes/UserRouter'); // 서비스 진입
+const authRouter = require('./src/routes/AuthRouter'); // 로그인
 
 const app = express();
 
@@ -19,8 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('dev'));
 
+//---------------------------------------
 // 라우터 연결
 app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
+//---------------------------------------
 
 // 루트 경로
 app.get('/', (req, res) => {
