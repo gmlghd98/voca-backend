@@ -89,25 +89,8 @@ exports.postSetVoca = async (req, res) => {
         return res.status(400).json(response('fail', '내용을 입력하세요'));
     }
 
-    const { set_name, description } = set;
-    const word = null,
-        meaning = null,
-        vocaResult = null;
-
-    // TODO : Transaction으로 감싸기
     try {
-        const setResult = await setService.post(userId, set_name, description);
-        if (setResult.affectedRows <= 0) throw Error('세트 생성에 실패했습니다');
-
-        voca.forEach(async (v) => {
-            (word = v.word), (meaning = v.meaning);
-            vocaResult = await vocaService.post(_, word, meaning);
-            if (vocaResult.affectedRows <= 0) throw Error('단어 생성에 실패했습니다');
-        });
-
-        // 여기까지 오면 성공 (commit 처리)
-
-        // TODO : response 객체 생성
+        await setService.postSetVoca(userId, set, voca);
         res.status(200).json(response('success', '세트와 단어 생성에 성공했습니다'));
     } catch (err) {
         res.status(500).json(response('fail', err.message));
