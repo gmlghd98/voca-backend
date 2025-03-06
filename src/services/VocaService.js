@@ -26,6 +26,22 @@ exports.get = async (vocaId) => {
     }
 };
 
+// 단어 검색
+exports.find = async (setId, keyword) => {
+    const sql = `
+      select * from voca 
+      where set_id=? and set_name like '%?%'
+    `;
+
+    try {
+        const [result] = await pool.query(sql, [setId, keyword]);
+        return result;
+    } catch (err) {
+        console.error('Error: ' + err);
+        throw new Error('DB 연결 실패: ' + err.message);
+    }
+};
+
 // 단어 생성
 exports.post = async (setId, word, meaning) => {
     const vocaData = [setId, word, meaning];

@@ -27,37 +27,14 @@ exports.get = async (setId) => {
 };
 
 // 세트 검색
-exports.find = async (keyword) => {
-    const sql = `select * from voca_set where set_name like '%?%'`;
+exports.find = async (userId, keyword) => {
+    const sql = `
+        select * from voca_set 
+        where user_id=? and set_name like '%?%'
+      `;
 
     try {
-        const [result] = await pool.query(sql, [keyword]);
-        return result;
-    } catch (err) {
-        console.error('Error: ' + err);
-        throw new Error('DB 연결 실패: ' + err.message);
-    }
-};
-
-// 세트 검색
-exports.find = async (keyword) => {
-    const sql = `select * from voca_set where set_name like '%?%'`;
-
-    try {
-        const [result] = await pool.query(sql, [keyword]);
-        return result;
-    } catch (err) {
-        console.error('Error: ' + err);
-        throw new Error('DB 연결 실패: ' + err.message);
-    }
-};
-
-// 세트 검색
-exports.find = async (keyword) => {
-    const sql = `select * from voca_set where set_name like '%?%'`;
-
-    try {
-        const [result] = await pool.query(sql, [keyword]);
+        const [result] = await pool.query(sql, [userId, keyword]);
         return result;
     } catch (err) {
         console.error('Error: ' + err);
