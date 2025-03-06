@@ -10,7 +10,7 @@ exports.getSet = async (req, res) => {
         const result = await setService.get(setId);
 
         if (result.length > 0) {
-            res.json(response('success', `${setId}번 세트를 조회합니다`, result));
+            res.json(response('success', `${setId}번 세트를 조회합니다`, result[0]));
         } else {
             res.status(404).json(response('fail', `${setId}번 세트는 없습니다`));
         }
@@ -91,8 +91,12 @@ exports.postSetVoca = async (req, res) => {
     }
 
     try {
-        await setAndVocaService.post(userId, set, voca);
-        res.status(200).json(response('success', '세트와 단어 생성에 성공했습니다'));
+        const result = await setAndVocaService.post(userId, set, voca);
+        if (result) {
+            res.status(200).json(response('success', '세트와 단어 생성에 성공했습니다'));
+        } else {
+            res.status(500).json(response('fail', '세트와 단어 생성에 실패했습니다'));
+        }
     } catch (err) {
         res.status(500).json(response('fail', err.message));
     }

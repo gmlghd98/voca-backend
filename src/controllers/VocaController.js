@@ -26,7 +26,7 @@ exports.getVoca = async (req, res) => {
         const result = await vocaService.get(vocaId);
 
         if (result.length > 0) {
-            res.json(response('success', `${vocaId}번 단어를 조회합니다`, result));
+            res.json(response('success', `${vocaId}번 단어를 조회합니다`, result[0]));
         } else {
             res.status(404).json(response('fail', `${vocaId}번 단어는 없습니다`));
         }

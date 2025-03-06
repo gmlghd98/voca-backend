@@ -11,7 +11,7 @@ exports.getUser = async (req, res) => {
         const [result] = await pool.query(sql, [userId]); // []
 
         if (result.length > 0) {
-            res.json(response('success', `${userId}번 회원을 조회합니다`, result));
+            res.json(response('success', `${userId}번 회원을 조회합니다`, result[0]));
         } else {
             res.status(404).json(response('fail', `${userId}번 회원은 없습니다`));
         }
