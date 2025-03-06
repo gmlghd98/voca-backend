@@ -125,11 +125,16 @@ exports.deleteSet = async (req, res) => {
 // 세트 + 단어 생성
 exports.postSetVoca = async (req, res) => {
     const { userId } = req.params;
-    const { set, voca } = req.body;
+    // const { set, voca } = req.body;
+    const { set_name, description, words: voca } = req.body;
 
-    if (!set || !voca || voca.length == 0) {
+    // 유효성 검사
+    // if(!set || !voca || voca.length == 0)
+    if (!set_name || !description || !voca || voca.length == 0) {
         return res.status(400).json(response('fail', '내용을 입력하세요'));
     }
+
+    const set = { set_name, description };
 
     try {
         const result = await setAndVocaService.post(userId, set, voca);

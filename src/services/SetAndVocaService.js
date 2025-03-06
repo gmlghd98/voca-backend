@@ -10,8 +10,8 @@ exports.post = async (userId, set, voca) => {
         await connection.beginTransaction(); // 트랜잭션 시작
 
         // 세트 생성
-        const { set_name: setName, description } = set;
-        const setResult = await setService.post(userId, setName, description);
+        const { set_name, description } = set;
+        const setResult = await setService.post(userId, set_name, description);
         if (setResult.affectedRows <= 0) throw new Error('세트 생성에 실패했습니다');
 
         const setId = setResult.insertId; // 생성된 세트 id 추출

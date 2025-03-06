@@ -2,7 +2,7 @@ const pool = require('../models/DB_Pool');
 
 // 전체 단어 조회
 exports.getAll = async (setId) => {
-    const sql = `select * from voca_set where set_id=?`;
+    const sql = `select * from voca where set_id=?`;
 
     try {
         const [result] = await pool.query(sql, [setId]);
@@ -15,7 +15,7 @@ exports.getAll = async (setId) => {
 
 // 단어 조회
 exports.get = async (vocaId) => {
-    const sql = `select * from voca_set where voca_id=?`;
+    const sql = `select * from voca where voca_id=?`;
 
     try {
         const [result] = await pool.query(sql, [vocaId]);
@@ -46,7 +46,7 @@ exports.find = async (setId, keyword) => {
 exports.post = async (setId, word, meaning) => {
     const vocaData = [setId, word, meaning];
     const sql = `
-      insert into voca_set(set_id, word, meaning)
+      insert into voca(set_id, word, meaning)
       value(?, ?, ?)
     `;
 
@@ -63,7 +63,7 @@ exports.post = async (setId, word, meaning) => {
 exports.update = async (vocaId, word, meaning) => {
     const setData = [word, meaning, vocaId];
     const sql = `
-    update voca_set
+    update voca
     set word = ?, meaning = ? 
     where voca_id = ?
   `;
@@ -79,7 +79,7 @@ exports.update = async (vocaId, word, meaning) => {
 
 // 단어 삭제
 exports.delete = async (vocaId) => {
-    const sql = `delete from voca_set where voca_id=? `;
+    const sql = `delete from voca where voca_id=? `;
 
     try {
         const [result] = await pool.query(sql, [vocaId]);

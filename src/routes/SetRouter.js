@@ -10,9 +10,12 @@ const vocaRouter = require('../routes/VocaRouter');
 // ---------- Voca Set ----------
 
 // 세트 생성
-router.post('/', setController.postSet);
+// router.post('/', setController.postSet); => *세트 + 단어 생성* 으로 변경
 
-// 세트 조회 (세트 정보 + 단어 목록)
+// 사용자 전체 세트 조회
+router.get('/', setController.getAllSet);
+
+// 세트 조회
 router.get('/:setId', setController.getSet);
 
 // 세트 수정
@@ -27,6 +30,7 @@ router.delete('/:setId', setController.deleteSet);
 router.use('/:setId/voca', vocaRouter);
 
 // ---------- Set + Voca ----------
-router.post('/new', setController.postSetVoca);
+// 세트 + 단어 생성
+router.post('/', setController.postSetVoca);
 
 module.exports = router;
