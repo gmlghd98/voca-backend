@@ -6,6 +6,12 @@ const { response } = require('../utils/format');
 exports.getAllSet = async (req, res) => {
     const { userId } = req.params;
 
+    // 유효성 검사
+    console.log('GET 요청 확인: userId =', userId); // ✅ userId가 정상적으로 전달되는지 확인
+    if (!userId) {
+        return res.status(400).json(response('fail', 'userId가 필요합니다.'));
+    }
+
     try {
         const result = await setService.getAll(userId);
 
@@ -15,6 +21,7 @@ exports.getAllSet = async (req, res) => {
             res.status(404).json(response('fail', `${userId}번 사용자의 세트는 없습니다`));
         }
     } catch (err) {
+        console.error('단어 세트 조회 오류:', err);
         res.status(500).json(response('fail', err.message));
     }
 };
