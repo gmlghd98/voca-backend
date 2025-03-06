@@ -45,7 +45,14 @@ exports.getSet = async (req, res) => {
 
 // 세트 검색
 exports.findSet = async (req, res) => {
-    const { userId, keyword } = req.params;
+    // const { userId, keyword } = req.params;
+    const { userId } = req.params;
+    const { keyword } = req.query;
+
+    // 유효성 검사
+    if (!keyword || keyword === '') {
+        res.status(400).json('fail', '검색 키워드를 입력하세요');
+    }
 
     try {
         const result = await setService.find(userId, keyword);

@@ -35,8 +35,5 @@ exports.post = async (userId, set, voca) => {
     }
 };
 
-// 세트 + 단어 수정
-// TODO: 굳이 수정도 같이 해야하는지는 논의
-
 // 세트 + 단어 삭제 (구현 x)
 // DB 내에 제약조건 설정 (On Delete Cascade)
