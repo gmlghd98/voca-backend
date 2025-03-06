@@ -17,7 +17,8 @@ const app = express();
 // 미들웨어
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors({ origin: ['http://localhost:3000', 'https://example.com'] }));
+app.use(cors()); // 모든 도메인 요청 허용
 app.use(morgan('dev'));
 
 //---------------------------------------

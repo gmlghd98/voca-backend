@@ -3,12 +3,13 @@ const { response } = require('../utils/format');
 
 // 퀴즈 단어 추출
 exports.getQuizVoca = async (req, res) => {
-    const { setId } = req.body;
-    // TODO : 문제 갯수를 입력받을지 결정
-    const { quantity } = req.body;
-    if (!quantity) {
-        return res.status(400).json(response('fail', '갯수를 입력하세요'));
-    }
+    const { setId } = req.params;
+    const quantity = 10; // 갯수 고정
+
+    // const { quantity } = req.query;
+    // if (!quantity) {
+    //     return res.status(400).json(response('fail', '갯수를 입력하세요'));
+    // }
 
     const quizData = [setId, quantity];
     const sql = 'select voca_id, word, meaning from voca where set_id = ? order by RAND() limit ?';
@@ -25,10 +26,4 @@ exports.getQuizVoca = async (req, res) => {
         console.error('Error: ' + err);
         res.status(500).json(response('fail', 'DB 연결 실패: ' + err.message));
     }
-};
-
-// 퀴즈 채점
-exports.postQuizVoca = async () => {
-    // TODO : 어떤 형식으로 사용자의 답을 받을지 결정
-    const { answer } = req.body;
 };
