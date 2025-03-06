@@ -80,6 +80,7 @@ exports.deleteSet = async (req, res) => {
     }
 };
 
+// --------------------------------------------
 // 세트 + 단어 생성
 exports.postSetVoca = async (req, res) => {
     const { userId } = req.params;
