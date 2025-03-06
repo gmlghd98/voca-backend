@@ -86,7 +86,7 @@ exports.postSetVoca = async (req, res) => {
     const { userId } = req.params;
     const { set, voca } = req.body;
 
-    if (!set || !voca) {
+    if (!set || !voca || voca.length == 0) {
         return res.status(400).json(response('fail', '내용을 입력하세요'));
     }
 
