@@ -37,35 +37,6 @@ exports.post = async (userId, set, voca) => {
 
 // 세트 + 단어 수정
 // TODO: 굳이 수정도 같이 해야하는지는 논의
-exports.update = async (setId, set, voca) => {
-    const connection = await pool.getConnection(); // 연결 생성
 
-    try {
-        await connection.beginTransaction(); // 트랜잭션 시작
-
-        // 세트 수정
-        const { set_name: setName, description } = set;
-        const setResult = await setService.update(setId, setName, description);
-        if (setResult.affectedRows <= 0) throw new Error('세트 생성에 실패했습니다');
-
-        const setId = setResult.insertId; // 생성된 세트 id 추출
-
-        // 단어 수정
-        // TODO: 변경된 항목만 수정처리
-        const word = null,
-            meaning = null;
-        for (const v of voca) {
-            (word = v.word), (meaning = v.meaning);
-            const vocaResult = await vocaService.post(setId, word, meaning);
-            if (vocaResult.affectedRows <= 0) throw new Error('단어 생성에 실패했습니다');
-        }
-
-        await connection.commit(); // 트랜잭션 종료, 커밋 (성공)
-        return true;
-    } catch (err) {
-        await connection.rollback(); // 트랜잭션 종료, 롤백 (실패)
-        throw err;
-    } finally {
-        connection.release();
-    }
-};
+// 세트 + 단어 삭제 (구현 x)
+// DB 내에 제약조건 설정 (On Delete Cascade)
