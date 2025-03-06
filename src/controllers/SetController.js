@@ -38,10 +38,10 @@ exports.getSet = async (req, res) => {
 
 // 세트 검색
 exports.findSet = async (req, res) => {
-    const { keyword } = req.params;
+    const { setId, keyword } = req.params;
 
     try {
-        const result = await setService.find(keyword);
+        const result = await setService.find(setId, keyword);
 
         if (result.length > 0) {
             res.json(response('success', `${keyword} 검색 결과입니다`, result));
