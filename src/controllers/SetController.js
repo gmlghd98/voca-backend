@@ -2,6 +2,23 @@ const setService = require('../services/SetService');
 const setAndVocaService = require('../services/SetAndVocaService');
 const { response } = require('../utils/format');
 
+// 사용자 세트 전체 조회
+exports.getAllSet = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const result = await setService.getAll(userId);
+
+        if (result.length > 0) {
+            res.json(response('success', `${userId}번 사용자의 세트를 조회합니다`, result));
+        } else {
+            res.status(404).json(response('fail', `${userId}번 사용자의 세트는 없습니다`));
+        }
+    } catch (err) {
+        res.status(500).json(response('fail', err.message));
+    }
+};
+
 // 세트 조회
 exports.getSet = async (req, res) => {
     const { setId } = req.params;
@@ -10,9 +27,26 @@ exports.getSet = async (req, res) => {
         const result = await setService.get(setId);
 
         if (result.length > 0) {
-            res.json(response('success', `${setId}번 세트를 조회합니다`, result[0]));
+            res.json(response('success', `${setId}번 세트를 조회합니다`, result));
         } else {
             res.status(404).json(response('fail', `${setId}번 세트는 없습니다`));
+        }
+    } catch (err) {
+        res.status(500).json(response('fail', err.message));
+    }
+};
+
+// 세트 검색
+exports.findSet = async (req, res) => {
+    const { keyword } = req.params;
+
+    try {
+        const result = await setService.find(keyword);
+
+        if (result.length > 0) {
+            res.json(response('success', `${keyword} 검색 결과입니다`, result));
+        } else {
+            res.status(404).json(response('fail', `${keyword} 검색 결과는 없습니다`));
         }
     } catch (err) {
         res.status(500).json(response('fail', err.message));
