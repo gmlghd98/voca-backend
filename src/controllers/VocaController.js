@@ -35,6 +35,23 @@ exports.getVoca = async (req, res) => {
     }
 };
 
+// 단어 검색
+exports.findVoca = async (req, res) => {
+    const { setId, keyword } = req.params;
+
+    try {
+        const result = await vocaService.find(setId, keyword);
+
+        if (result.length > 0) {
+            res.json(response('success', `${keyword} 검색 결과입니다`, result));
+        } else {
+            res.status(404).json(response('fail', `${keyword} 검색 결과는 없습니다`));
+        }
+    } catch (err) {
+        res.status(500).json(response('fail', err.message));
+    }
+};
+
 // 단어 생성
 exports.postVoca = async (req, res) => {
     const { setId } = req.params;
