@@ -10,8 +10,10 @@ const quizController = require('../controllers/QuizController');
 // ---------- Quiz ----------
 
 // 퀴즈 단어 추출
-// '/:vocaId' 보다 먼저 정의
 router.get('/quiz', quizController.getQuizVoca);
+
+// 퀴즈 채점
+router.post('/quiz/submit', quizController.submitQuiz);
 
 // ---------- Voca ----------
 
