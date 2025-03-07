@@ -6,6 +6,8 @@ exports.getQuizVoca = async (req, res) => {
     const { setId } = req.params;
     const quantity = 10; // 갯수 고정
 
+    console.log('퀴즈 진입 성공 ---------');
+
     // const { quantity } = req.query;
     // if (!quantity) {
     //     return res.status(400).json(response('fail', '갯수를 입력하세요'));

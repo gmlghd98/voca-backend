@@ -7,6 +7,12 @@ const quizController = require('../controllers/QuizController');
 
 // Root - /api/users/{userId}/set/{setId}/voca
 
+// ---------- Quiz ----------
+
+// 퀴즈 단어 추출
+// '/:vocaId' 보다 먼저 정의
+router.get('/quiz', quizController.getQuizVoca);
+
 // ---------- Voca ----------
 
 // 전체 단어 조회
@@ -23,10 +29,5 @@ router.put('/:vocaId', vocaController.updateVoca);
 
 // 단어 삭제
 router.delete('/:vocaId', vocaController.deleteVoca);
-
-// ---------- Quiz ----------
-
-// 퀴즈 단어 추출
-router.get('/quiz', quizController.getQuizVoca);
 
 module.exports = router;

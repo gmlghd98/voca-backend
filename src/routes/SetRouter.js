@@ -15,11 +15,11 @@ const vocaRouter = require('../routes/VocaRouter');
 // 사용자 전체 세트 조회
 router.get('/', setController.getAllSet);
 
-// 세트 조회
-router.get('/:setId', setController.getSet);
-
 // 세트 검색
 router.get('/search', setController.findSet);
+
+// 세트 조회
+router.get('/:setId', setController.getSet);
 
 // 세트 수정
 router.put('/:setId', setController.updateSet);

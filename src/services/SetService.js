@@ -2,7 +2,7 @@ const pool = require('../models/DB_Pool');
 
 // 사용자 세트 전체 조회
 exports.getAll = async (userId) => {
-    const sql = `selct * from voca_set where user_id=?`;
+    const sql = `select * from voca_set where user_id=?`;
 
     try {
         const [result] = await pool.query(sql, [userId]);
@@ -30,11 +30,11 @@ exports.get = async (setId) => {
 exports.find = async (userId, keyword) => {
     const sql = `
         select * from voca_set 
-        where user_id=? and set_name like '%?%'
+        where user_id=? and set_name like ?
       `;
 
     try {
-        const [result] = await pool.query(sql, [userId, keyword]);
+        const [result] = await pool.query(sql, [userId, `%${keyword}%`]);
         return result;
     } catch (err) {
         console.error('Error: ' + err);

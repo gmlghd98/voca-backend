@@ -17,11 +17,8 @@ exports.post = async (userId, set, voca) => {
         const setId = setResult.insertId; // 생성된 세트 id 추출
 
         // 단어 생성
-        const word = null,
-            meaning = null;
         for (const v of voca) {
-            (word = v.word), (meaning = v.meaning);
-            const vocaResult = await vocaService.post(setId, word, meaning);
+            const vocaResult = await vocaService.post(setId, v.word, v.meaning);
             if (vocaResult.affectedRows <= 0) throw new Error('단어 생성에 실패했습니다');
         }
 
