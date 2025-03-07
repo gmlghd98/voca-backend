@@ -28,9 +28,17 @@ exports.login = async (req, res) => {
             return res.status(401).json(response('fail', '이메일 또는 비밀번호가 잘못되었습니다.'));
         }
 
-        // JWT 토큰 생성
+        // // JWT 토큰 생성
+        // const token = generateToken(user);
+        // res.json(response('success', '로그인 성공', { token }));
         const token = generateToken(user);
-        res.json(response('success', '로그인 성공', { token }));
+        res.json(
+            response('success', '로그인 성공', {
+                user_id: user.user_id, // ✅ 여기서 user_id를 명확하게 전달해야 함
+                email: user.user_email,
+                token,
+            })
+        );
     } catch (err) {
         console.error('Error:', err);
         res.status(500).json(response('fail', 'DB 연결 실패: ' + err.message));
