@@ -18,7 +18,7 @@ exports.getAllSet = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${userId}번 사용자의 세트를 조회합니다`, result));
         } else {
-            res.status(404).json(response('fail', `${userId}번 사용자의 세트는 없습니다`));
+            res.status(204).json(response('fail', `${userId}번 사용자의 세트는 없습니다`));
         }
     } catch (err) {
         console.error('단어 세트 조회 오류:', err);
@@ -36,7 +36,7 @@ exports.getSet = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${setId}번 세트를 조회합니다`, result));
         } else {
-            res.status(404).json(response('fail', `${setId}번 세트는 없습니다`));
+            res.status(204).json(response('fail', `${setId}번 세트는 없습니다`));
         }
     } catch (err) {
         res.status(500).json(response('fail', err.message));
@@ -60,7 +60,8 @@ exports.findSet = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${keyword} 검색 결과입니다`, result));
         } else {
-            res.status(404).json(response('fail', `${keyword} 검색 결과는 없습니다`));
+            // 204 => No Content (요청이 성공적으로 처리되었지만, 응답 본문에 보낼 데이터가 없음)
+            res.status(204).json(response('fail', `${keyword} 검색 결과는 없습니다`));
         }
     } catch (err) {
         res.status(500).json(response('fail', err.message));

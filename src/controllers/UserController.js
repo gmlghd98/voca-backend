@@ -13,7 +13,7 @@ exports.getUser = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${userId}번 회원을 조회합니다`, result));
         } else {
-            res.status(404).json(response('fail', `${userId}번 회원은 없습니다`));
+            res.status(204).json(response('fail', `${userId}번 회원은 없습니다`));
         }
     } catch (err) {
         console.error('Error: ' + err);

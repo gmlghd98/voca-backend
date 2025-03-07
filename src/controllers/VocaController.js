@@ -18,7 +18,7 @@ exports.getAllVoca = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${setId}번 세트의 단어를 조회합니다`, result));
         } else {
-            res.status(404).json(response('fail', `${setId}번 세트에 단어가 없습니다`));
+            res.status(204).json(response('fail', `${setId}번 세트에 단어가 없습니다`));
         }
     } catch (err) {
         console.error('단어 조회 오류:', err);
@@ -36,14 +36,14 @@ exports.getVoca = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${vocaId}번 단어를 조회합니다`, result));
         } else {
-            res.status(404).json(response('fail', `${vocaId}번 단어는 없습니다`));
+            res.status(204).json(response('fail', `${vocaId}번 단어는 없습니다`));
         }
     } catch (err) {
         res.status(500).json(response('fail', err.message));
     }
 };
 
-// 단어 검색
+// 단어 검색 (선택 사항)
 exports.findVoca = async (req, res) => {
     const { setId, keyword } = req.params;
 
@@ -53,7 +53,7 @@ exports.findVoca = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${keyword} 검색 결과입니다`, result));
         } else {
-            res.status(404).json(response('fail', `${keyword} 검색 결과는 없습니다`));
+            res.status(204).json(response('fail', `${keyword} 검색 결과는 없습니다`));
         }
     } catch (err) {
         res.status(500).json(response('fail', err.message));

@@ -22,7 +22,7 @@ exports.getQuizVoca = async (req, res) => {
         if (result.length > 0) {
             res.json(response('success', `${setId}번 세트의 퀴즈를 생성했습니다`, result));
         } else {
-            res.status(404).json(response('fail', `단어가 없습니다`));
+            res.status(204).json(response('fail', `단어가 없습니다`));
         }
     } catch (err) {
         console.error('Error: ' + err);
